@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const s3 = require('hapi-s3');
 const slug = require('slug');
 const Travel = require('./models/Travel');
+const Opentrip = require('./models/Opentrip');
 
 const port = process.env.PORT || 4000;
 require('dotenv').config();
@@ -54,6 +55,28 @@ const init = async () => {
 			}
 		},
 		{
+			method 	: 'GET',
+			path	: '/api/v1/opentrips',
+			handler	:  (request, reply) => {
+				return Opentrip.find();
+			}
+		},
+		{
+			method 	: 'POST',
+			path	: '/api/v1/opentrips',
+			handler	: (request, reply) => {
+				const {name, place} = request.payload;
+				const opentrip = new Opentrip({
+					name,
+					url : slug(name),
+					place,
+					price
+				});
+
+				return opentrip.save();
+			}
+		},
+		{
 			method : 'GET',
 	        path   : '/bucket',
 	        async handler(request) {
@@ -70,7 +93,7 @@ const init = async () => {
         options : {
             publicKey : process.env.AWS_ACCESS_KEY_ID,
             secretKey : process.env.AWS_SECRET_ACCESS_KEY,
-            bucket : 'leccalab'
+            bucket : process.env.AWS_BUCKET
         }
     });
 	await server.start();
