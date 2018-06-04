@@ -79,12 +79,14 @@ const init = async () => {
 			method 	: 'POST',
 			path	: '/api/v1/opentrips',
 			handler	: (request, reply) => {
-				const {name, place} = request.payload;
+				const {name, place, coordinate} = request.payload;
 				const opentrip = new Opentrip({
 					name,
 					url : slug(name),
 					place,
-					price
+					coordinate : {
+						lat, lot
+					}
 				});
 
 				return opentrip.save();

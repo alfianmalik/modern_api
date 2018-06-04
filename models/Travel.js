@@ -10,8 +10,8 @@ const TravelSchema = new Schema({
 	url : { type: String, set: toLower },
 	images : [String],
 	coordinate : {
-		lat : {type : String},
-		lot : {type : String},
+		lat : {type : String, default: 0},
+		lot : {type : String, default: 0},
 	},
 	place: [String]
 });
