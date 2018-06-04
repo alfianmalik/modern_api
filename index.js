@@ -41,14 +41,21 @@ const init = async () => {
 			}
 		},
 		{
+			method 	: 'GET',
+			path	: '/api/v1/travel/{id}',
+			handler	:  (request, reply) => {
+				return Travel.findOne(request.id);
+			}
+		},
+		{
 			method 	: 'POST',
 			path	: '/api/v1/travels',
 			handler	: (request, reply) => {
-				const {name, place} = request.payload;
+				const {name, place, lat } = request.payload;
 				const travel = new Travel({
 					name,
 					url : slug(name),
-					place
+					lat
 				});
 
 				return travel.save();
@@ -59,6 +66,13 @@ const init = async () => {
 			path	: '/api/v1/opentrips',
 			handler	:  (request, reply) => {
 				return Opentrip.find();
+			}
+		},
+		{
+			method 	: 'GET',
+			path	: '/api/v1/opentrip/{id}',
+			handler	:  (request, reply) => {
+				return Opentrip.findOne(request.id);
 			}
 		},
 		{

@@ -5,6 +5,11 @@ const OpentripSchema = new Schema({
 	name	: String,
 	url 	: String,
 	place	: String,
+	images : [String],
+	coordinate : {
+		lat : {type : String},
+		lot : {type : String},
+	},
 	price	: Number
 });
 
