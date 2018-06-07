@@ -55,7 +55,8 @@ const init = async () => {
 				const travel = new Travel({
 					name,
 					url : slug(name),
-					lat
+					lat,
+					lot
 				});
 
 				return travel.save();
