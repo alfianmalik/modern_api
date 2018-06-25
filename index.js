@@ -14,7 +14,12 @@ const Pack = require('./package');
 const port = process.env.PORT || 4000;
 require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/pathravel')
+mongoose.connect('mongodb://localhost:27017/pathravel', function(err) {
+			if (err) {
+                console.log('MongoDB connection error');
+                process.exit(1);
+            }
+		});
 // mongoose.connect(`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@ds141320.mlab.com:41320/pathravel`);
 
 mongoose.connection.once('open', () => {
