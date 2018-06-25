@@ -6,11 +6,16 @@ const OpentripSchema = new Schema({
 	url 	: String,
 	place	: String,
 	images : [String],
+	phone_number : String,
 	coordinate : {
-		lat : {type : String},
-		lot : {type : String},
+		lat : {type : String, default: 0},
+		lot : {type : String, default: 0},
 	},
-	price	: Number
+	price	: Number,
+	category : Number,
+	deleted_at: String,
+	updated_at: String,
+	created_at: String
 });
 
 module.exports = mongoose.model('Opentrip', OpentripSchema);

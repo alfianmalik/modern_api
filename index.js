@@ -60,13 +60,10 @@ const init = async () => {
 			path	: '/api/v1/travel/{id}',
 			handler	:  (request, reply) => {
 				return Travel.findOne(request.id);
-			}
-		},
-		{
-			method 	: 'GET',
-			path	: '/api/v1/travel/{id}',
-			handler	:  (request, reply) => {
-				return Travel.findOne(request.id);
+			},
+			config: {
+				description: 'Get one travel data',
+				tags: ['api', 'v1', 'data']
 			}
 		},
 		{
@@ -82,6 +79,10 @@ const init = async () => {
 				});
 
 				return travel.save();
+			},
+			config: {
+				description: 'Post a destionations.',
+				tags: ['api', 'v1', 'painting']
 			}
 		},
 		{
