@@ -82,7 +82,14 @@ const init = async () => {
 			},
 			config: {
 				description: 'Post a destionations.',
-				tags: ['api', 'v1', 'painting']
+				tags: ['api', 'v1', 'painting'],
+				plugins: {
+		            'hapi-swagger': {
+		                payloadType: 'form'
+		            }
+		        },
+				validate: {
+		            payload: []		        }
 			}
 		},
 		{
