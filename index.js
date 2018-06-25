@@ -63,6 +63,13 @@ const init = async () => {
 			}
 		},
 		{
+			method 	: 'GET',
+			path	: '/api/v1/travel/{id}',
+			handler	:  (request, reply) => {
+				return Travel.findOne(request.id);
+			}
+		},
+		{
 			method 	: 'POST',
 			path	: '/api/v1/travels',
 			handler	: (request, reply) => {
