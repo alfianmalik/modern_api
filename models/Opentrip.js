@@ -1,6 +1,19 @@
 const mongoose 	= require('mongoose');
 const Schema	= mongoose.Schema;
 
+/**
+ * [toLower description]
+ * @param  {[type]} v [description]
+ * @return {[type]}   [description]
+ */
+function toLower (v) {
+  	return v.toLowerCase();
+}
+
+/**
+ * [OpentripSchema description]
+ * @type {Schema}
+ */
 const OpentripSchema = new Schema({
 	name	: String,
 	url 	: String,
@@ -18,4 +31,8 @@ const OpentripSchema = new Schema({
 	created_at: String
 });
 
+/**
+ * [exports description]
+ * @type {[type]}
+ */
 module.exports = mongoose.model('Opentrip', OpentripSchema);

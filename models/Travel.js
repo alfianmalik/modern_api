@@ -27,15 +27,15 @@ const TravelSchema = new Schema({
 	},
 	category : Number,
 	weather : {
-		temp: String,
-		pressure: String,
+		temp: {type : String, default: 0},
+		pressure: {type : String, default: 0},
 		humidity: String,
-		temp_min: String,
-		temp_max: String,
+		temp_min: {type : String, default: 0},
+		temp_max: {type : String, default: 0},
 		visibility: String,
 		wind: {
-			speed: String,
-			deg: String
+			speed: {type : String, default: 0},
+			deg: {type : String, default: 0},
 		},
 		coord: {
 			lon	: {type : String, default: 0},
@@ -44,10 +44,12 @@ const TravelSchema = new Schema({
 	},
 	place: [String],
 	tips_travel : String,
-	deleted_at: String,
-	updated_at: String,
-	created_at: String
-
+	deleted_at: Date,
+	updated_at: Date,
+	created_at: { 
+		type : Date,
+		default: Date.now
+	}
 });
 
 /**

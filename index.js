@@ -1,4 +1,5 @@
 const hapi = require('hapi');
+const Joi = require('joi');
 const mongoose = require('mongoose');
 const s3 = require('hapi-s3');
 const slug = require('slug');
@@ -70,26 +71,39 @@ const init = async () => {
 			method 	: 'POST',
 			path	: '/api/v1/travels',
 			handler	: (request, reply) => {
-				const {name, place, lat } = request.payload;
+				const {name, address, postal_code, phone_number, lat, lot } = request.payload;
 				const travel = new Travel({
 					name,
 					url : slug(name),
-					lat,
-					lot
+					address,
+					postal_code,
+					phone_number,
+					coordinate : {
+						lat,
+						lot
+					}
 				});
 
 				return travel.save();
 			},
 			config: {
 				description: 'Post a destionations.',
-				tags: ['api', 'v1', 'painting'],
+				tags: ['api', 'v1'],
 				plugins: {
 		            'hapi-swagger': {
 		                payloadType: 'form'
 		            }
 		        },
-				validate: {
-		            payload: []		        }
+		        validate: {
+		            payload: Joi.object({
+		                name	: Joi.string(),
+		                address	: Joi.string(),
+		                postal_code	: Joi.string(),
+		                phone_number: Joi.string(),
+						lat : Joi.string(),
+						lot : Joi.string()
+		            })
+		        }
 			}
 		},
 		{
