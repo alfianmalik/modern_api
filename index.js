@@ -71,7 +71,7 @@ const init = async () => {
 			method 	: 'POST',
 			path	: '/api/v1/travels',
 			handler	: (request, reply) => {
-				const {name, address, postal_code, phone_number, lat, lot } = request.payload;
+				const {name, images, address, postal_code, phone_number, lat, lot } = request.payload;
 				const travel = new Travel({
 					name,
 					url : slug(name),
