@@ -15,7 +15,7 @@
     "hapi-s3": "^0.3.1",
     "hapi-swagger": "^9.1.1",
     "inert": "^5.1.0",
-    "mongoose": "^5.1.6",
+    "mongoose": "^5.1.7",
     "nodemon": "^1.17.5",
     "slug": "^0.9.1",
     "vision": "^5.3.3"

@@ -71,9 +71,10 @@ const init = async () => {
 			method 	: 'POST',
 			path	: '/api/v1/travels',
 			handler	: (request, reply) => {
-				const {name, images, address, postal_code, phone_number, lat, lot } = request.payload;
+				const {name, tips_travel, images, address, postal_code, phone_number, lat, lot } = request.payload;
 				const travel = new Travel({
 					name,
+					images,
 					url : slug(name),
 					address,
 					postal_code,
@@ -96,12 +97,14 @@ const init = async () => {
 		        },
 		        validate: {
 		            payload: Joi.object({
-		                name	: Joi.string(),
-		                address	: Joi.string(),
-		                postal_code	: Joi.string(),
-		                phone_number: Joi.string(),
-						lat : Joi.string(),
-						lot : Joi.string()
+		                name	: Joi.string().required().description('Name of the destinations'),
+		                tips_travel : Joi.string(),
+		                images : Joi.string().required().description('Put link of the images'),
+		                address	: Joi.string().required().description('Address of the destinations'),
+		                postal_code	: Joi.string().required().description('Postal Code of the destinations'),
+		                phone_number: Joi.string().required().description('Phone Number of the destinations'),
+						lat : Joi.string().required(),
+						lot : Joi.string().required()
 		            })
 		        }
 			}
