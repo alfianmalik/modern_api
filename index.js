@@ -2,7 +2,7 @@ const hapi = require('hapi');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const s3 = require('hapi-s3');
-const slug = require('slug');
+const slug = require('slugify');
 const Travel = require('./models/Travel');
 const Opentrip = require('./models/Opentrip');
 
