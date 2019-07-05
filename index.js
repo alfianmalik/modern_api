@@ -15,29 +15,189 @@ const Pack = require('./package');
 const port = process.env.PORT || 4000;
 require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/pathravel', function(err) {
-			if (err) {
-                console.log('MongoDB connection error');
-                process.exit(1);
-            }
-		});
+// mongoose.connect('mongodb://localhost:27017/pathravel', function(err) {
+// 			if (err) {
+//                 console.log('MongoDB connection error');
+//                 process.exit(1);
+//             }
+// 		});
 // mongoose.connect(`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@ds141320.mlab.com:41320/pathravel`);
 
-mongoose.connection.once('open', () => {
-	console.log('Connected to database');
-});
+// mongoose.connection.once('open', () => {
+// 	console.log('Connected to database');
+// });
 
-mongoose.connection.on('error', () => {
-	 console.error.bind(console, 'MongoDB connection error:');
-});
+// mongoose.connection.on('error', () => {
+// 	 console.error.bind(console, 'MongoDB connection error:');
+// });
 
 const server = hapi.server({
 	port : port,
-	host : 'localhost'
+	host : "192.168.3.25"
 });
 
 const init = async () => {
 	server.route([
+		{
+			method 	: 'GET',
+			path	: '/notice/news/recent',
+			handler	: (request, reply) => {
+				return {	
+						"op": true,
+						"msg": "",
+						"data" :[  
+						   {  
+						      "id": "23658",
+						      "tittle": "Tite gets called in this Monday and has 27 days of preparation for debut",
+						      "description": "The right absences are Casemiro and Marcelo of Real Madrid and Roberto Firmino of Liverpool, who will play in the Champions League final",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://www.otempo.com.br/superfc/tite-recebe-convocados-nesta-segunda-e-tem-27-dias-de-prepara%C3%A3o-A -estreia-1.1789078",
+						      "origin": "Otempo.com.br",
+						      "category": "sports",
+						      "date": "2018-05-21 11:37:50"
+						   },
+						   {  
+						      "id": "23670",
+						      "tittle": "Technician in scolding, incredible chance lost ... and Gold still celebrates goal",
+						      "description": "Web has fun with Flamengo striker memes celebrating a goal that was not worth, while another coach loses his job at the Brasileirão",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://globoesporte.globo.com/futebol/brasileirao-serie-a/noticia/tecnico-na-bronca-chance-incrivel-perdida-e-dourado-ainda-festeja-gol.ghtml",
+						      "origin": "Globe",
+						      "category": "sports",
+						      "date": "2018-05-21 11:03:24"
+						   },
+						   {  
+						      "id": "23671",
+						      "tittle": "Corinthians sets schedule of returns and spared for games against Millonarios and Internacional",
+						      "description": "Corinthians has already defined the schedule regarding the use of holders and reserves in the two matches of the week - receives Millionarios-COL, by Libertadores, and travels to face Internacional.",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://www.meutimao.com.br/noticias-do-corinthians/288853/corinthians-define-record-of-reviews-and-poppates-for-games-contra-millonarios-e-internacional",
+						      "origin": "Meutimao.com.br",
+						      "category": "sports",
+						      "date": "2018-05-21 10:55:02"
+						   },
+						   {  
+						      "id": "23673",
+						      "tittle": "Adversary of Brazil in preparation for the World Cup, Croatia is called",
+						      "Description": "Croatia is one more selection to announce its final call for the World Cup on Monday, or nearly so Displaying a read.",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://www.terra.com.br/esportes/croacia/adversaria-do-brasil-na-preparacao-para-a-copa-croacia-e-convocada,a7e2dfc588c35b45fde0db441a80ad81y2a1fk3m.html",
+						      "origin": "Terra.com.br",
+						      "category": "sports",
+						      "date": "2018-05-21 10:40:48"
+						   }
+						]
+					};
+			}
+		},
+		{
+			method 	: 'GET',
+			path	: '/notice/news/{category}/{page}',
+			handler	: (request, reply) => {
+				return {	
+						"op": true,
+						"msg": "",
+						"data":{
+							"pages" : 2002,
+							"page" : 1,
+							"news" : [
+							   {  
+							      "id": "23658",
+							      "tittle": "Tite gets called in this Monday and has 27 days of preparation for debut ,",
+							      "description": "The right absences are Casemiro and Marcelo of Real Madrid and Roberto Firmino of Liverpool, who will play in the Champions League final",
+							      "url_img": "https://via.placeholder.com/150",
+							      "link": "https://www.otempo.com.br/superfc/tite-recebe-convocados-nesta-segunda-e-tem-27-dias-de-prepara%C3%A3o-A -estreia-1.1789078",
+							      "origin": "Otempo.com.br",
+							      "category": "sports",
+							      "date": "2018-05-21 11:37:50"
+							   },
+							   {  
+							      "id": "23670",
+							      "tittle": "Technician in scolding, incredible chance lost ... and Gold still celebrates goal",
+							      "description": "Web has fun with Flamengo striker memes celebrating a goal that was not worth, while another coach loses his job at the Brasileirão",
+							      "url_img": "https://via.placeholder.com/150",
+							      "link": "https://globoesporte.globo.com/futebol/brasileirao-serie-a/noticia/tecnico-na-bronca-chance-incrivel-perdida-e-dourado-ainda-festeja-gol.ghtml",
+							      "origin": "Globe",
+							      "category": "sports",
+							      "date": "2018-05-21 11:03:24"
+							   },
+							   {  
+							      "id": "23671",
+							      "tittle": "Corinthians sets schedule of returns and spared for games against Millonarios and Internacional",
+							      "description": "Corinthians has already defined the schedule regarding the use of holders and reserves in the two matches of the week - receives Millionarios-COL, by Libertadores, and travels to face Internacional.",
+							      "url_img": "https://via.placeholder.com/150",
+							      "link": "https://www.meutimao.com.br/noticias-do-corinthians/288853/corinthians-define-record-of-reviews-and-poppates-for-games-contra-millonarios-e-internacional",
+							      "origin": "Meutimao.com.br",
+							      "category": "sports",
+							      "date": "2018-05-21 10:55:02"
+							   },
+							   {  
+							      "id": "23673",
+							      "tittle": "Adversary of Brazil in preparation for the World Cup, Croatia is called",
+							      "Description": "Croatia is one more selection to announce its final call for the World Cup on Monday, or nearly so Displaying a read.",
+							      "url_img": "https://via.placeholder.com/150",
+							      "link": "https://www.terra.com.br/esportes/croacia/adversaria-do-brasil-na-preparacao-para-a-copa-croacia-e-convocada,a7e2dfc588c35b45fde0db441a80ad81y2a1fk3m.html",
+							      "origin": "Terra.com.br",
+							      "category": "sports",
+							      "date": "2018-05-21 10:40:48"
+							   }
+						]
+						}
+					};
+			}
+		},
+		{
+			method 	: 'GET',
+			path	: '/notice/search/{search}',
+			handler	: (request, reply) => {
+				return {	
+						"op": true,
+						"msg": "",
+						"data":[  
+						   {  
+						      "id": "23658",
+						      "tittle": "Tite gets called in this Monday and has 27 days of preparation for debut ,",
+						      "description": "The right absences are Casemiro and Marcelo of Real Madrid and Roberto Firmino of Liverpool, who will play in the Champions League final",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://www.otempo.com.br/superfc/tite-recebe-convocados-nesta-segunda-e-tem-27-dias-de-prepara%C3%A3o-A -estreia-1.1789078",
+						      "origin": "Otempo.com.br",
+						      "category": "sports",
+						      "date": "2018-05-21 11:37:50"
+						   },
+						   {  
+						      "id": "23670",
+						      "tittle": "Technician in scolding, incredible chance lost ... and Gold still celebrates goal",
+						      "description": "Web has fun with Flamengo striker memes celebrating a goal that was not worth, while another coach loses his job at the Brasileirão",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://globoesporte.globo.com/futebol/brasileirao-serie-a/noticia/tecnico-na-bronca-chance-incrivel-perdida-e-dourado-ainda-festeja-gol.ghtml",
+						      "origin": "Globe",
+						      "category": "sports",
+						      "date": "2018-05-21 11:03:24"
+						   },
+						   {  
+						      "id": "23671",
+						      "tittle": "Corinthians sets schedule of returns and spared for games against Millonarios and Internacional",
+						      "description": "Corinthians has already defined the schedule regarding the use of holders and reserves in the two matches of the week - receives Millionarios-COL, by Libertadores, and travels to face Internacional.",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://www.meutimao.com.br/noticias-do-corinthians/288853/corinthians-define-record-of-reviews-and-poppates-for-games-contra-millonarios-e-internacional",
+						      "origin": "Meutimao.com.br",
+						      "category": "sports",
+						      "date": "2018-05-21 10:55:02"
+						   },
+						   {  
+						      "id": "23673",
+						      "tittle": "Adversary of Brazil in preparation for the World Cup, Croatia is called",
+						      "Description": "Croatia is one more selection to announce its final call for the World Cup on Monday, or nearly so Displaying a read.",
+						      "url_img": "https://via.placeholder.com/150",
+						      "link": "https://www.terra.com.br/esportes/croacia/adversaria-do-brasil-na-preparacao-para-a-copa-croacia-e-convocada,a7e2dfc588c35b45fde0db441a80ad81y2a1fk3m.html",
+						      "origin": "Terra.com.br",
+						      "category": "sports",
+						      "date": "2018-05-21 10:40:48"
+						   }
+						]
+					};
+			}
+		},
 		{
 			method 	: 'GET',
 			path	: '/',
